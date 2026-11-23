@@ -9,19 +9,19 @@
 1. Push this folder to a GitHub repo, then in Netlify choose "Add new site > Import an existing project" and pick the repo. Leave the build command empty. Publish directory is `public` (already in netlify.toml).
    Or with the CLI: `npm install` then `npx netlify deploy --prod`.
 2. Add these in Site settings > Environment variables:
-   - `GMAIL_APP_PASSWORD` - a Google App Password for mwirelesssupportcentre@gmail.com (see below). Required for the Submit button.
+   - `GMAIL_APP_PASSWORD` - a Google App Password for eleazar.reco@gmail.com (see below). Required for the Submit button.
    - `ADMIN_PASSWORD` - your own admin password. Optional `ADMIN_USER` (default `Telenor`). If you skip these, the defaults are `Telenor` / `orders`.
-   - Optional: `MAIL_USER` and `MAIL_TO` (both default to mwirelesssupportcentre@gmail.com), `MAIL_TZ` (default `America/Chicago`).
+   - Optional: `MAIL_USER` and `MAIL_TO` (`MAIL_USER` is the sender, default eleazar.reco@gmail.com; `MAIL_TO` is the receiver, default mwirelesssupportcentre@gmail.com), `MAIL_TZ` (default `America/Chicago`).
 3. Redeploy once after adding the variables.
 
 ## Google App Password
-1. Sign in to mwirelesssupportcentre@gmail.com and turn on 2-Step Verification (Google Account > Security).
+1. Sign in to eleazar.reco@gmail.com and turn on 2-Step Verification (Google Account > Security).
 2. Go to Google Account > Security > 2-Step Verification > App passwords, create one (name it "Order Portal") and copy the 16 characters.
 3. Paste it as `GMAIL_APP_PASSWORD` in Netlify. Do not put it in any file.
 
 ## Submit button
 - At the bottom of the order table, an employee presses "Submit order" for the selected store.
-- An email goes from mwirelesssupportcentre@gmail.com to mwirelesssupportcentre@gmail.com with the order table in the body and an Excel attachment in the same format as "Download Excel" (sheets: Order Report, Store Summary, All Items), filtered to that store.
+- As soon as the order is submitted, an email goes from eleazar.reco@gmail.com to mwirelesssupportcentre@gmail.com with the order table in the body and an Excel attachment in the same format as "Download Excel" (sheets: Order Report, Store Summary, All Items), filtered to that store.
 - A store can submit again only after 15 seconds.
 
 ## Notes
@@ -32,7 +32,7 @@
 ## Preloaded
 - The six stores in the 11-23-2026 IASR file (101 El Camino, 102 Salinas, 103 Tully Rd, 104 Senter, 105 Winchester, 106 San Pablo Ave) and that IASR file's items are built in, so the portal works straight after deploy. Budgets start at $0: set them under "Edit monthly budget".
 - Duplicate store/SKU rows in the IASR file are loaded once. Max qty = Allocation minus On Order.
-- Orders are emailed to mwirelesssupportcentre@gmail.com. The Gmail App Password must belong to the sending account (`MAIL_USER`, default mwirelesssupportcentre@gmail.com).
+- Orders are emailed from eleazar.reco@gmail.com to mwirelesssupportcentre@gmail.com. The Gmail App Password must belong to the sending account, eleazar.reco@gmail.com.
 
 ## Store setup (admin)
 - Sign in, open "Store setup (store names and IASR names)". Each store has a Loc ID (auto-numbered), a store name, the IASR name, an optional Pool and a Manager tick.

@@ -112,7 +112,7 @@ export default async (req) => {
     if (!(Number(b.qty) > 0) || !Array.isArray(b.lines) || !b.lines.length) return J({ error: "The order is empty" }, 400);
     if (typeof b.file !== "string" || b.file.length > 3_000_000) return J({ error: "Order file is too large" }, 413);
 
-    const user = Netlify.env.get("MAIL_USER") || "mwirelesssupportcentre@gmail.com";
+    const user = Netlify.env.get("MAIL_USER") || "eleazar.reco@gmail.com";
     const pass = Netlify.env.get("GMAIL_APP_PASSWORD");
     if (!pass) return J({ error: "Email is not set up on the server yet" }, 500);
 
@@ -139,7 +139,7 @@ export default async (req) => {
     try {
       await transporter.sendMail({
         from: `"M Wireless Order Portal" <${user}>`,
-        to: Netlify.env.get("MAIL_TO") || user,
+        to: Netlify.env.get("MAIL_TO") || "mwirelesssupportcentre@gmail.com",
         subject: `Order submitted: ${loc} ${b.store} - ${money(b.value)} (${when})`,
         html,
         attachments: [{ filename, content: Buffer.from(b.file, "base64"), contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" }],
